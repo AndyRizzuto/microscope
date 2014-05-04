@@ -1,7 +1,11 @@
 // Fixture data 
 if (Posts.find().count() === 0) {
   var now = new Date().getTime();
-
+  // create my users
+  var rizId = Meteor.users.insert({
+    profile: { name: 'riz' }
+  });
+  var riz = Meteor.users.findOne(rizId);
   // create two users
   var tomId = Meteor.users.insert({
     profile: { name: 'Tom Coleman' }
@@ -54,4 +58,16 @@ if (Posts.find().count() === 0) {
     submitted: now - 12 * 3600 * 1000,
     commentsCount: 0
   });
+
+  for (var i = 0; i < 10; i++) {
+    Posts.insert({
+      title: 'Test post #' + i,
+      author: riz.profile.name,
+      userId: riz._id,
+      url: 'http://google.com/?q=test-' + i,
+      submitted: now - i * 3600 * 1000,
+      commentsCount: 0
+    });
+  }
+
 }
