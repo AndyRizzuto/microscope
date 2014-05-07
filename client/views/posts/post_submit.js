@@ -1,7 +1,8 @@
-Template.postSubmit.events({
+  Template.postSubmit.events({
   'submit form': function(e) {
     e.preventDefault();
-
+    var _url = $(e.target).find('[name=url]').val();
+    alert(_url);
     var post = {
       url: $(e.target).find('[name=url]').val(),
       title: $(e.target).find('[name=title]').val(),
